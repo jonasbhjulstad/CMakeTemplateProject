@@ -22,7 +22,7 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
       "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
   )
 endif()
-
+option(BUILD_TOM "Build tom" ON)
 # ---- Add dependencies via CPM ----
 # see https://github.com/TheLartians/CPM.cmake for more info
 
@@ -39,7 +39,9 @@ if(NOT ${PROJECT_NAME}_EXTERNAL_PACKAGES)
 endif()
 message(WARNING "External packages: ${${PROJECT_NAME}_EXTERNAL_PACKAGES}")
 add_subdirectory(source)
+if(BUILD_TOM)
 add_subdirectory(tom)
+endif()
 if(${ENABLE_TESTING} AND NOT TARGET ${PROJECT_NAME}Tests)
 add_subdirectory(test)
 endif()
